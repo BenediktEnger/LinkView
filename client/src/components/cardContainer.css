@@ -1,0 +1,30 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .card {
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px;
+    width: calc(33.33% - 20px); /* Damit maximal drei Karten nebeneinander passen */
+    box-sizing: border-box;
+  }
+  
+  .card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .card-content {
+    padding: 10px;
+  }
+  
+  /* Media Query für Mobilgeräte */
+  @media (max-width: 768px) {
+    .card {
+      width: 100%; /* Stapeln Sie die Karten bei Mobilgeräten */
+    }
+  }
+  
