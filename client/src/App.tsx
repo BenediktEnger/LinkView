@@ -6,8 +6,8 @@ function App() {
 
   
   return (
-    <div>
-      <h1>Anwendung</h1>
+    <div >
+      <h1>Links</h1>
       <CardContainer/>
     </div>
   );

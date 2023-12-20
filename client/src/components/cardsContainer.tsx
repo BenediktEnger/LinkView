@@ -14,7 +14,7 @@ const CardContainer = () => {
         fetch("/links")
             .then((res) => res.json())
             .then((data) => setData(data))
-    })
+    }, [])
 
     return (
         <div className="card-container">

@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import linkRoutes from './routes/links';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './swagger';
-import { connectDatabase } from './database/connectDatabase';
+import { dataAccessLayer } from './models/Mongoose/MongooseDataAccess';
 
 const app = express();
 const port = process.env.PORT || 3002;
@@ -20,7 +20,8 @@ app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
   });
 
-(async () => {
-  await connectDatabase()
-})()
+async function connect() {
+  await dataAccessLayer.connect('mongodb://127.0.0.1:27017/', 'Links')
+}
 
+connect()
