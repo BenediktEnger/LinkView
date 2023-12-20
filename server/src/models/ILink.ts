@@ -2,5 +2,6 @@
 
 export interface ILink {
     name: string;
-    path: string;
+    link: string;
+    imageSource: string;
   }

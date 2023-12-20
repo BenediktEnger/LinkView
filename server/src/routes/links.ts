@@ -8,7 +8,9 @@ const router = Router();
 const modelName = 'Links'
 const LinkValidationRules = [
   body('name').notEmpty().withMessage('Name is required'),
-  body('path').notEmpty().withMessage('Path is required'),
+  body('link').notEmpty().withMessage('link is required'),
+  body('imageSource').notEmpty().withMessage('imageSource is required'),
+
 ];
 
 /**
@@ -26,9 +28,12 @@ const LinkValidationRules = [
  *               name:
  *                 type: string
  *                 description: link name
- *               path:
+ *               link:
  *                 type: string
- *                 description: link path
+ *                 description: link link
+ *               imageSource:
+ *                 type: string
+ *                 description: link link
  *     responses:
  *       201:
  *         description: Created
@@ -45,7 +50,8 @@ router.post('/', LinkValidationRules, async (req: Request, res: Response) => {
 
   const link: ILink[] = [{
     name: req.body.name,
-    path: req.body.path
+    link: req.body.link,
+    imageSource: req.body.imageSource
   }];
 
   try {
@@ -137,9 +143,12 @@ router.get('/:name', async (req: Request, res: Response) => {
  *               name:
  *                 type: string
  *                 description: new name of link
- *               path:
+ *               link:
  *                 type: string
- *                 description: Path of link
+ *                 description: link of link
+ *               imageSource:
+ *                 type: string
+ *                 description: source of image
  *     responses:
  *       201:
  *         description: Updated
@@ -155,7 +164,7 @@ router.put('/:name', LinkValidationRules, async (req: Request, res: Response) =>
   const model = dataAccessLayer.getModel<ILink>(modelName, LinkSchema)
   const foundLink = await dataAccessLayer.find(model,{name: req.params.name})
   if (foundLink !== null && foundLink!.length !== 0){
-    await dataAccessLayer.updateMany(model, {name:req.params.name}, {$set: {name: req.body.name, path: req.body.path}})
+    await dataAccessLayer.updateMany(model, {name:req.params.name}, {$set: {name: req.body.name, link: req.body.link, imageSource: req.body.imageSource}})
     const links = await dataAccessLayer.find(model,{name: req.body.name})
     res.json(links);
   }

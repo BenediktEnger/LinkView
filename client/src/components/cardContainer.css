@@ -8,19 +8,24 @@
     border: 1px solid #ddd;
     margin: 10px;
     padding: 10px;
-    width: calc(33.33% - 20px); /* Damit maximal drei Karten nebeneinander passen */
+    width: calc(25% - 20px); 
+    height: auto;
+    
     box-sizing: border-box;
-    background: linear-gradient(to right, rgba(149,149,245, 0.8), rgba(149,149,245,0.2)), #fff;
+    background: rgba(75, 192, 192, 0.4);
     border-radius: 10px;
   }
   
   .card img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    object-fit: cover;
   }
   
   .card-content {
     padding: 10px;
+    height: 100px; /* Feste Höhe für den Text */
+    overflow: hidden; /* Text, der über die feste Höhe hinausgeht, wird ausgeblendet */
   }
   
   /* Media Query für Mobilgeräte */

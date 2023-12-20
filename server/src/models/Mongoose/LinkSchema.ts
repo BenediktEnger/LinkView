@@ -3,7 +3,9 @@ import { ILink } from "../ILink";
 
 const LinkSchema = new Schema<ILink>({
     name : {type: String, required: true},
-    path : {type: String, required: true},
+    link : {type: String, required: true},
+    imageSource : {type: String, required: true},
+
 })
 
 LinkSchema.set('toJSON', {

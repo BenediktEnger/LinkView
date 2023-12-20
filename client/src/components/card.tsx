@@ -3,7 +3,6 @@ import './cardContainer.css';
 
 export interface CardProps {
     title: string;
-    text: string;
     imageSource: string;
     link: string;
 }
@@ -13,13 +12,13 @@ const openInNewTab = (url: string) => {
   window.open(url, '_blank', 'noreferrer');
 };
 
-const Card :React.FC<CardProps> = ({title, text, imageSource, link}) => {
+const Card :React.FC<CardProps> = ({title, imageSource, link}) => {
   return (
     <div className="card" onClick={() => openInNewTab(link)}>
-      <img src={imageSource} alt={title} />
+      <img src={imageSource} />
       <div className="card-content">
         <h2>{title}</h2>
-        <p>{text}</p>
+        <p>{link}</p>
       </div>
     </div>
   );

@@ -4,7 +4,8 @@ import './cardContainer.css';
 
 interface IReceiveLink {
     name: string;
-    path: string;
+    link: string;
+    imageSource: string;
 }
 
 const CardContainer = () => {
@@ -22,9 +23,8 @@ const CardContainer = () => {
                 data.map((d, index) => {
                     const props: CardProps = {
                         title: d.name,
-                        link: d.path,
-                        text: '',
-                        imageSource: ''
+                        link: d.link,
+                        imageSource: d.imageSource
                     };
 
                     return <Card key={index} {...props} />;
