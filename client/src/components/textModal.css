@@ -1,0 +1,19 @@
+.modal-container {
+    background-color: rgba(179, 179, 179, 1);
+    width: auto;
+    height: auto;
+    margin: 50px;
+    padding: 10px;
+}
+
+.modal-content {
+    display: flex; /* Flexbox-Layout hier anwenden */
+    flex-direction: column; /* In Spaltenrichtung anordnen */
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container button {
+    align-items: center;
+    margin: 10px;
+}

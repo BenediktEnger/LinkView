@@ -2,14 +2,8 @@ import React, { useEffect } from 'react';
 import Card, { CardProps } from './card'
 import './cardContainer.css';
 
-interface IReceiveLink {
-    name: string;
-    link: string;
-    imageSource: string;
-}
-
 const CardContainer = () => {
-    const [data, setData] = React.useState<IReceiveLink[]>()
+    const [data, setData] = React.useState<ILinkData[]>()
 
     useEffect(() => {
         fetch("/links")
