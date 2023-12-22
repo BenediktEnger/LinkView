@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import './textModal.css';
 import '../index.css'
@@ -14,6 +14,14 @@ const TextModal: React.FC<IModal> = ({ header, isOpen, fields, onRequestClose, o
 
   const [inputData, setInputData] = React.useState<string[]>(new Array(fields.length).fill(''));
 
+  useEffect(() =>{
+    if (isOpen) {
+      setInputData((prevData) => {
+      const newData = new Array(fields.length).fill('')
+      return newData
+      })
+    }
+  }, [isOpen])
   const handleSave = () => {
     onSave(inputData);
   };

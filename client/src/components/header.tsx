@@ -2,9 +2,11 @@ import React from 'react';
 import TextModal from './textModal';
 import './header.css';
 import ILinkData from '../data';
+import { useAppContext } from '../AppContext';
 
 const Header  = () => {
   const[open, setOpen] = React.useState<boolean>(false)
+  const { updateData } = useAppContext();
 
   const onclose = () => {
     setOpen(false)
@@ -26,6 +28,7 @@ const Header  = () => {
   
       const result = await response.json();
       console.log('Successful posted data:', result);
+      updateData()
     } catch (error) {
       console.error('Error sending POST request');
     }
@@ -45,6 +48,7 @@ const Header  = () => {
     <div className='header-container'>
       <h1>LinkView</h1>
       <button onClick={() => setOpen(true)}>Add</button>
+      <button onClick={() => setOpen(true)}>Edit</button>
       <TextModal
        header='Enter new Link data'
        isOpen={open}
