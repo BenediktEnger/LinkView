@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TextModal from './textModal';
 import './header.css';
 import ILinkData from '../data';
-import { useAppContext } from '../AppContext';
+import { useUpdateContext } from '../UpdateContext';
+import { useEditContext } from '../EditContext';
 
 const Header  = () => {
   const[open, setOpen] = React.useState<boolean>(false)
-  const { updateData } = useAppContext();
+  const { updateData } = useUpdateContext();
+  const {editData, editSelected, resetEditData} = useEditContext();
 
   const onclose = () => {
     setOpen(false)
@@ -48,7 +50,7 @@ const Header  = () => {
     <div className='header-container'>
       <h1>LinkView</h1>
       <button onClick={() => setOpen(true)}>Add</button>
-      <button onClick={() => setOpen(true)}>Edit</button>
+      {editSelected ? <button className='abort' onClick={() => resetEditData()}>End Edit</button> : <button onClick={() => editData()}>Edit</button>}
       <TextModal
        header='Enter new Link data'
        isOpen={open}

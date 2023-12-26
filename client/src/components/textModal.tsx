@@ -2,26 +2,29 @@ import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import './textModal.css';
 import '../index.css'
+import { getConfigFileParsingDiagnostics } from 'typescript';
 interface IModal {
   header: string
   isOpen: boolean;
   fields: string[];
+  defaults?: string[];
   onRequestClose: () => void;
   onSave: (data: string[]) => void;
 }
 
-const TextModal: React.FC<IModal> = ({ header, isOpen, fields, onRequestClose, onSave }) => {
+const TextModal: React.FC<IModal> = ({ header, isOpen, fields, defaults, onRequestClose, onSave }) => {
 
   const [inputData, setInputData] = React.useState<string[]>(new Array(fields.length).fill(''));
 
   useEffect(() =>{
     if (isOpen) {
       setInputData((prevData) => {
-      const newData = new Array(fields.length).fill('')
+      const newData = defaults?.map((d) => {return d ?? ''}) ?? new Array<string>(fields.length).fill('')
       return newData
       })
     }
   }, [isOpen])
+
   const handleSave = () => {
     onSave(inputData);
   };

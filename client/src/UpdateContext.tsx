@@ -1,17 +1,17 @@
 import React, { createContext, useContext, useState } from 'react';
 
-interface AppContextProps {
+interface UpdateContextProps {
     dataUpdated: boolean;
     updateData: () => void;
     resetDataUpdated: () => void;
   }
   
-  const AppContext = createContext<AppContextProps | undefined>(undefined);
+  const UpdateContext = createContext<UpdateContextProps | undefined>(undefined);
   
-  export const useAppContext = () => {
-    const context = useContext(AppContext);
+  export const useUpdateContext = () => {
+    const context = useContext(UpdateContext);
     if (!context) {
-      throw new Error("useAppContext must be used within an AppProvider");
+      throw new Error("useUpdateContext must be used within an AppProvider");
     }
     return context;
   };
@@ -20,7 +20,7 @@ interface AppContextProps {
     children: React.ReactNode;
   }
   
-  export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
+  export const UpdateProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [dataUpdated, setDataUpdated] = useState(false);
   
     const updateData = () => {
@@ -31,15 +31,15 @@ interface AppContextProps {
       setDataUpdated(false);
     };
   
-    const contextValue: AppContextProps = {
+    const contextValue: UpdateContextProps = {
       dataUpdated,
       updateData,
       resetDataUpdated,
     };
   
     return (
-      <AppContext.Provider value={contextValue}>
+      <UpdateContext.Provider value={contextValue}>
         {children}
-      </AppContext.Provider>
+      </UpdateContext.Provider>
     );
   };

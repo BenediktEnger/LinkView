@@ -195,6 +195,6 @@ router.delete('/:name', async (req: Request, res: Response) => {
   const model = dataAccessLayer.getModel<ILink>(modelName, LinkSchema)
   const result = await dataAccessLayer.deleteMany(model,{name: req.params.name})
   console.log(result)
-  res.status(204).send();
+  res.json(result)
 });
 export default router;

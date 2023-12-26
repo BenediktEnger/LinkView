@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import Card, { CardProps } from './card'
 import './cardContainer.css';
 import ILinkData from '../data';
-import { useAppContext } from '../AppContext';
+import { useUpdateContext } from '../UpdateContext';
 
 const CardContainer = () => {
     const [data, setData] = React.useState<ILinkData[]>()
-    const {dataUpdated, resetDataUpdated} = useAppContext();
+    const {dataUpdated, resetDataUpdated} = useUpdateContext();
 
     useEffect(() => {
         fetch("/links")
@@ -18,7 +18,7 @@ const CardContainer = () => {
             })
 
         resetDataUpdated();
-    }, [dataUpdated, resetDataUpdated])
+    }, [dataUpdated])
 
     return (
         <div className="card-container">
@@ -30,7 +30,7 @@ const CardContainer = () => {
                         imageSource: d.imageSource
                     };
 
-                    return <Card key={index} {...props} />;
+                    return (<Card key={index} {...props}/>);
                 })
             ) : (
                 <p>No Data</p>

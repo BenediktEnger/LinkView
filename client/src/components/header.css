@@ -1,5 +1,5 @@
 .header-container {
-    background-color: aqua;
+    background-color: rgb(54,54,54);
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -7,8 +7,13 @@
 .header-container h1{
     margin-right: auto;
     margin-left: 20px;
+    color: white;
 }
 .header-container button {
     height: 50px;
     margin-right: 20px;
+}
+
+.header-container .abort {
+    background-color: red;
 }

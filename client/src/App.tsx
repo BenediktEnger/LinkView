@@ -2,16 +2,19 @@ import React, { useEffect } from 'react';
 import CardContainer from './components/cardsContainer';
 import './App.css';
 import Header from './components/header';
-import { AppProvider } from './AppContext';
+import { UpdateProvider } from './UpdateContext';
+import { EditProvider } from './EditContext';
 
 function App() {
 
-  
+
   return (
-    <AppProvider >
-      <Header/>
-      <CardContainer/>
-    </AppProvider>
+    <EditProvider>
+      <UpdateProvider >
+        <Header />
+        <CardContainer />
+      </UpdateProvider>
+    </EditProvider>
   );
 }
 
