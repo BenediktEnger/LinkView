@@ -6,7 +6,7 @@ interface UpdateContextProps {
     resetDataUpdated: () => void;
   }
   
-  const UpdateContext = createContext<UpdateContextProps | undefined>(undefined);
+  export const UpdateContext = createContext<UpdateContextProps | undefined>(undefined);
   
   export const useUpdateContext = () => {
     const context = useContext(UpdateContext);

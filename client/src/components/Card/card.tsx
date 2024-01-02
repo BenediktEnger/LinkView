@@ -15,10 +15,10 @@ export interface CardProps {
 const Card: React.FC<CardProps> = ({ title, imageSource, link }) => {
   const { editSelected, resetEditData } = useEditContext();
   const{updateData} = useUpdateContext(); 
-  const[open, setOpen] = useState(false);
+  const[openModal, setOpenModal] = useState(false);
 
   const onClose = (() => {
-    setOpen(false)
+    setOpenModal(false)
   });
 
   async function PutLinkData(oldName: string, data:ILinkData) {
@@ -62,7 +62,7 @@ const Card: React.FC<CardProps> = ({ title, imageSource, link }) => {
         link: data[1],
         imageSource: data[2]
       }
-      setOpen(false)
+      setOpenModal(false)
       PutLinkData(title, putData)
   })
 
@@ -73,7 +73,7 @@ const Card: React.FC<CardProps> = ({ title, imageSource, link }) => {
 
   return (<div className="card" >
 
-    <div onClick={() => openInNewTab(link)} className="card-content">
+    <div onClick={() => openInNewTab(link)} className="card-content" data-testid="linkClick">
       <img src={imageSource} alt="service" />
       <h2>{title}</h2>
       <p>{link}</p>
@@ -87,7 +87,7 @@ const Card: React.FC<CardProps> = ({ title, imageSource, link }) => {
             <div className='line line2' />
           </div>
         </div>
-        <div className='edit-icon' onClick={()=>setOpen(true)}>
+        <div className='edit-icon' onClick={()=>setOpenModal(true)} data-testid="editClick">
           <img src={EditLogo} alt='edit Logo' />
         </div>
       </div>
@@ -96,7 +96,7 @@ const Card: React.FC<CardProps> = ({ title, imageSource, link }) => {
 
       <TextModal
        header={`Update Link data ${title}`}
-       isOpen={open}
+       isOpen={openModal}
        fields={['New Name', 'Link', 'Thumbnail']}
        defaults={[title, link, imageSource]}
        onRequestClose={onClose}

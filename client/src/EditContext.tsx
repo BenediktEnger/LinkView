@@ -6,7 +6,7 @@ interface EditContextProps {
     resetEditData: () => void;
   }
   
-  const EditContext = createContext<EditContextProps | undefined>(undefined);
+  export const EditContext = createContext<EditContextProps | undefined>(undefined);
   
   export const useEditContext = () => {
     const context = useContext(EditContext);
