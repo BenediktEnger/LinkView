@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import './textModal.css';
-import '../index.css'
-import { getConfigFileParsingDiagnostics } from 'typescript';
+
 interface IModal {
   header: string
   isOpen: boolean;
@@ -23,7 +22,7 @@ const TextModal: React.FC<IModal> = ({ header, isOpen, fields, defaults, onReque
       return newData
       })
     }
-  }, [isOpen])
+  }, [isOpen, fields.length, defaults])
 
   const handleSave = () => {
     onSave(inputData);
@@ -44,12 +43,13 @@ const TextModal: React.FC<IModal> = ({ header, isOpen, fields, defaults, onReque
         onRequestClose={onRequestClose}
         contentLabel="Eingabefelder Modal"
         className='modal-container'
+        ariaHideApp={false}
       >
         <div className='modal-content'>
           <h2>{header}</h2>
           {inputData.map((item, index) => {
             return (
-              <div>
+              <div key={index}>
                 <p>{fields[index]}</p>
                 <input type="text" value={item} onChange={(e) => onInputChange(e.target.value, index)} />
               </div>

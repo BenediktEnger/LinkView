@@ -1,0 +1,68 @@
+.card {
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px;
+    width: calc(25% - 20px);
+    height: 40vh;
+    display: flex;
+    box-sizing: border-box;
+    background: rgba(75, 192, 192, 0.4);
+    border-radius: 10px;  
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
+  }
+
+  .card img {
+    width: 80%;
+    height: 50%;
+    object-fit: cover;
+  }
+
+  .card-content {
+    display: block;
+    padding: 10px;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .manipulator-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-top: 0px;
+  }
+  
+  .edit-icon {
+  margin-top: auto;
+  cursor: pointer;
+  }
+  
+  .close-icon {
+    position: relative  ;
+    cursor: pointer;
+  }
+  
+  .circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #ff4d4d;
+    position: relative;
+  }
+  
+  .line {
+    position: absolute;
+    width: 14px;
+    height: 2px;
+    background-color: #ffffff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .line1 {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  
+  .line2 {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }

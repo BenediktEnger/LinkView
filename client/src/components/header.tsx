@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import TextModal from './textModal';
+import React from 'react';
+import TextModal from './TextModal/textModal';
 import './header.css';
 import ILinkData from '../data';
 import { useUpdateContext } from '../UpdateContext';

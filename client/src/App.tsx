@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import CardContainer from './components/cardsContainer';
+import CardContainer from './components/CardContainer/cardsContainer';
 import './App.css';
 import Header from './components/header';
 import { UpdateProvider } from './UpdateContext';

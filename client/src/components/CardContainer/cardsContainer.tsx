@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import Card, { CardProps } from './card'
+import Card, { CardProps } from '../Card/card'
 import './cardContainer.css';
-import ILinkData from '../data';
-import { useUpdateContext } from '../UpdateContext';
+import ILinkData from '../../data';
+import { useUpdateContext } from '../../UpdateContext';
 
 const CardContainer = () => {
     const [data, setData] = React.useState<ILinkData[]>()
@@ -18,7 +18,7 @@ const CardContainer = () => {
             })
 
         resetDataUpdated();
-    }, [dataUpdated])
+    }, [dataUpdated, resetDataUpdated])
 
     return (
         <div className="card-container">

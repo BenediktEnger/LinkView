@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './cardContainer.css';
-import EditLogo from '../images/editLogo30x30.png';
-import { useEditContext } from '../EditContext';
-import TextModal from './textModal';
-import ILinkData from '../data';
-import { useUpdateContext } from '../UpdateContext';
+import './card.css';
+import EditLogo from '../../images/editLogo30x30.png';
+import { useEditContext } from '../../EditContext';
+import TextModal from '../TextModal/textModal';
+import ILinkData from '../../data';
+import { useUpdateContext } from '../../UpdateContext';
 
 export interface CardProps {
   title: string;
@@ -74,7 +74,7 @@ const Card: React.FC<CardProps> = ({ title, imageSource, link }) => {
   return (<div className="card" >
 
     <div onClick={() => openInNewTab(link)} className="card-content">
-      <img src={imageSource} />
+      <img src={imageSource} alt="service" />
       <h2>{title}</h2>
       <p>{link}</p>
     </div>
@@ -88,7 +88,7 @@ const Card: React.FC<CardProps> = ({ title, imageSource, link }) => {
           </div>
         </div>
         <div className='edit-icon' onClick={()=>setOpen(true)}>
-          <img src={EditLogo} />
+          <img src={EditLogo} alt='edit Logo' />
         </div>
       </div>
       : null
