@@ -12,7 +12,7 @@ class MongooseDataAccess implements IDataAccessLayer{
     private connection? : Connection
     
     async connect(url: string, databaseName: string): Promise<void> {
-        this.connection = await mongoose.connect(`${url}${databaseName}`, {useNewUrlParser: true, useUnifiedTopology: true});
+        this.connection = await mongoose.connect(`${url}${databaseName}`, {});
     }
 
     async disconnect(): Promise<void> {
