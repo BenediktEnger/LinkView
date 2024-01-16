@@ -12,8 +12,8 @@
   }
 
   .card img {
-    width: 80%;
-    height: 50%;
+    width: auto;
+    height: 60%;
     object-fit: cover;
   }
 
