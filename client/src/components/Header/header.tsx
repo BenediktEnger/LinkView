@@ -5,6 +5,7 @@ import ILinkData from "../../data";
 import { useUpdateContext } from "../../UpdateContext";
 import { useEditContext } from "../../EditContext";
 import { PostLinkData } from "../../api/LinkApi";
+import { Sticky, StickyContainer } from "react-sticky";
 
 const Header = () => {
   const [open, setOpen] = React.useState<boolean>(false);
