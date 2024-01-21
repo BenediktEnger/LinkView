@@ -197,4 +197,6 @@ router.delete('/:name', async (req: Request, res: Response) => {
   console.log(result)
   res.json(result)
 });
-export default router;
+
+
+export {router};

@@ -26,6 +26,9 @@ coverage
 # Dependency directory
 node_modules
 bower_components
+coverage
+jest.config.js
+dist
 
 # Editors
 .idea
