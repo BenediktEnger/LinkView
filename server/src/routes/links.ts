@@ -1,16 +1,15 @@
-import { Router, Request, Response } from 'express';
-import { body, validationResult } from 'express-validator';
-import { ILink } from '../models/ILink';
-import { dataAccessLayer } from '../models/Mongoose/MongooseDataAccess';
-import LinkSchema from '../models/Mongoose/LinkSchema';
+import { Router, Request, Response } from "express";
+import { body, validationResult } from "express-validator";
+import { ILink } from "../models/ILink";
+import { dataAccessLayer } from "../models/Mongoose/MongooseDataAccess";
+import LinkSchema from "../models/Mongoose/LinkSchema";
 
 const router = Router();
-const modelName = 'Links'
+const modelName = "Links";
 const LinkValidationRules = [
-  body('name').notEmpty().withMessage('Name is required'),
-  body('link').notEmpty().withMessage('link is required'),
-  body('imageSource').notEmpty().withMessage('imageSource is required'),
-
+  body("name").notEmpty().withMessage("Name is required"),
+  body("link").notEmpty().withMessage("link is required"),
+  body("imageSource").notEmpty().withMessage("imageSource is required"),
 ];
 
 /**
@@ -37,34 +36,34 @@ const LinkValidationRules = [
  *     responses:
  *       201:
  *         description: Created
-*/
-router.post('/', LinkValidationRules, async (req: Request, res: Response) => {
-  console.log("Create new element called with data:")
-  console.log(req.body)
+ */
+router.post("/", LinkValidationRules, async (req: Request, res: Response) => {
+  console.log("Create new element called with data:");
+  console.log(req.body);
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    console.log(errors)
-    return res.status(400).json({ errors: errors.array() })
+    console.log(errors);
+    return res.status(400).json({ errors: errors.array() });
   }
 
-
-  const link: ILink[] = [{
-    name: req.body.name,
-    link: req.body.link,
-    imageSource: req.body.imageSource
-  }];
+  const link: ILink[] = [
+    {
+      name: req.body.name,
+      link: req.body.link,
+      imageSource: req.body.imageSource,
+    },
+  ];
 
   try {
-    const model = dataAccessLayer.getModel(modelName, LinkSchema)
-    await dataAccessLayer.insertMany(model, link)
-    console.log("data has been written")
+    const model = dataAccessLayer.getModel(modelName, LinkSchema);
+    await dataAccessLayer.insertMany(model, link);
+    console.log("data has been written");
+    res.status(201).json(link);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-  catch (error) {
-    console.log(error)
-    res.status(500).json({ error: 'Internal Server Error' })
-  }
-  res.status(201).json(link);
 });
 
 /**
@@ -77,15 +76,13 @@ router.post('/', LinkValidationRules, async (req: Request, res: Response) => {
  *       200:
  *         description: list of Links
  */
-router.get('/', async (req: Request, res: Response) => {
-  console.log("get all called")
-  const model = dataAccessLayer.getModel<ILink>(modelName, LinkSchema)
-  const links = await dataAccessLayer.find(model, {})
+router.get("/", async (req: Request, res: Response) => {
+  console.log("get all called");
+  const model = dataAccessLayer.getModel<ILink>(modelName, LinkSchema);
+  const links = await dataAccessLayer.find(model, {});
   if (links !== null) {
     res.json(links);
-  }
-  else
-    res.status(404).json({ error: 'No Links found' })
+  } else res.status(404).json({ error: "No Links found" });
 });
 
 /**
@@ -105,21 +102,20 @@ router.get('/', async (req: Request, res: Response) => {
  *       200:
  *         description: list of Links
  */
-router.get('/:name', async (req: Request, res: Response) => {
-  console.log('Get with name called: ' + req.params.name)
-  const model = dataAccessLayer.getModel<ILink>(modelName, LinkSchema)
-  const links = await dataAccessLayer.find(model, { name: req.params.name })
+router.get("/:name", async (req: Request, res: Response) => {
+  console.log("Get with name called: " + req.params.name);
+  const model = dataAccessLayer.getModel<ILink>(modelName, LinkSchema);
+  const links = await dataAccessLayer.find(model, { name: req.params.name });
   if (links) {
-    const receivedLinks = links.map(l => l)
-
+    const receivedLinks = links.map((l) => l);
 
     if (receivedLinks.length === 0) {
-      res.status(404).send('Link not found');
+      res.status(404).send("Link not found");
     } else {
       res.json(receivedLinks);
     }
   }
-  res.status(404)
+  res.status(404);
 });
 
 /**
@@ -153,25 +149,39 @@ router.get('/:name', async (req: Request, res: Response) => {
  *     responses:
  *       201:
  *         description: Updated
-*/
-router.put('/:name', LinkValidationRules, async (req: Request, res: Response) => {
-  const errors = validationResult(req);
+ */
+router.put(
+  "/:name",
+  LinkValidationRules,
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  console.log("Update called for name " + req.params.name)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    console.log("Update called for name " + req.params.name);
 
-  const model = dataAccessLayer.getModel<ILink>(modelName, LinkSchema)
-  const foundLink = await dataAccessLayer.find(model,{name: req.params.name})
-  if (foundLink !== null && foundLink!.length !== 0){
-    await dataAccessLayer.updateMany(model, {name:req.params.name}, {$set: {name: req.body.name, link: req.body.link, imageSource: req.body.imageSource}})
-    const links = await dataAccessLayer.find(model,{name: req.body.name})
-    res.json(links);
+    const model = dataAccessLayer.getModel<ILink>(modelName, LinkSchema);
+    const foundLink = await dataAccessLayer.find(model, {
+      name: req.params.name,
+    });
+    if (foundLink !== null && foundLink!.length !== 0) {
+      await dataAccessLayer.updateMany(
+        model,
+        { name: req.params.name },
+        {
+          $set: {
+            name: req.body.name,
+            link: req.body.link,
+            imageSource: req.body.imageSource,
+          },
+        }
+      );
+      const links = await dataAccessLayer.find(model, { name: req.body.name });
+      res.json(links);
+    } else res.status(404).json({ error: "link to update not found" });
   }
-  else
-    res.status(404).json({error: 'link to update not found'})
-});
+);
 
 /**
  * @swagger
@@ -190,13 +200,14 @@ router.put('/:name', LinkValidationRules, async (req: Request, res: Response) =>
  *       200:
  *         description: list of Links
  */
-router.delete('/:name', async (req: Request, res: Response) => {
-  console.log("Delete called for name " + req.params.name)
-  const model = dataAccessLayer.getModel<ILink>(modelName, LinkSchema)
-  const result = await dataAccessLayer.deleteMany(model,{name: req.params.name})
-  console.log(result)
-  res.json(result)
+router.delete("/:name", async (req: Request, res: Response) => {
+  console.log("Delete called for name " + req.params.name);
+  const model = dataAccessLayer.getModel<ILink>(modelName, LinkSchema);
+  const result = await dataAccessLayer.deleteMany(model, {
+    name: req.params.name,
+  });
+  console.log(result);
+  res.json(result);
 });
 
-
-export {router};
+export { router };

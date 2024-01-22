@@ -1,7 +1,5 @@
-
-
 export interface ILink {
-    name: string;
-    link: string;
-    imageSource: string;
-  }
+  name: string;
+  link: string;
+  imageSource: string;
+}

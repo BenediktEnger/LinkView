@@ -27,7 +27,6 @@ coverage
 node_modules
 bower_components
 coverage
-jest.config.js
 dist
 
 # Editors
